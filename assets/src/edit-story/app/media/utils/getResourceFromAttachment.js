@@ -18,6 +18,8 @@
  */
 import { parse } from 'date-fns';
 
+const par = parse;
+
 /**
  * Internal dependencies
  */
@@ -54,7 +56,8 @@ function getResourceFromAttachment(attachment) {
     },
     alt_text: alt,
   } = attachment;
-  const parsedDate = parse(date, "yyyy-LL-cc'T'HH:mm:ss", new Date());
+  debugger;
+  const parsedDate = par(date, "yyyy-LL-cc'T'HH:mm:ss", new Date());
   return createResource({
     mimeType,
     uploadDate: parsedDate ? new Date(parsedDate) : null,
