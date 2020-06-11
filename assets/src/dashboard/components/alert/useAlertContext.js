@@ -14,9 +14,23 @@
  * limitations under the License.
  */
 
-export { default as ErrorQueue } from './errorQueue';
-export { default as MyStoriesView } from './myStories';
-export { default as ExploreTemplatesView } from './exploreTemplates';
-export { default as TemplateDetailsView } from './templateDetails';
-export { default as SavedTemplatesView } from './savedTemplates';
-export { default as StoryAnimTool } from './storyAnimTool';
+/**
+ * External dependencies
+ */
+import { useContext } from 'react';
+/**
+ * Internal dependencies
+ */
+import { AlertContext } from './provider';
+
+const useAlertContext = () => {
+  const context = useContext(AlertContext);
+  if (!context) {
+    throw new Error(
+      'useAlertContext() must be used within a <Alert.Provider />'
+    );
+  }
+  return context;
+};
+
+export default useAlertContext;
