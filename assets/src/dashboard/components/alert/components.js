@@ -22,11 +22,15 @@ import styled, { keyframes } from 'styled-components';
 /**
  * Internal dependencies
  */
+<<<<<<< HEAD
 import {
   ALERT_SEVERITY,
   KEYBOARD_USER_SELECTOR,
   Z_INDEX,
 } from '../../constants';
+=======
+import { KEYBOARD_USER_SELECTOR, Z_INDEX } from '../../constants';
+>>>>>>> booosting z index for alerts so they are not hiding behind scroll to top button
 import { TypographyPresets } from '../typography';
 
 const slideIn = keyframes`
