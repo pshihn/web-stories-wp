@@ -24,8 +24,6 @@ export default styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  transform-origin: 50% 50%;
-
   ${({ overflowHidden }) =>
     overflowHidden &&
     css`
