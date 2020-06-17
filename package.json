@@ -197,6 +197,8 @@
     "test:js:watch": "npm run test:js -- --watch",
     "test:karma": "NODE_OPTIONS=\"--max-old-space-size=4096\" karma start karma.config.cjs --single-run",
     "test:karma:watch": "NODE_OPTIONS=\"--max-old-space-size=4096\" karma start karma.config.cjs",
+    "test:karma:coverage": "npm run test:karma -- --coverage; open build/logs/karma-coverage/index.html",
+    "test:karma:watch": "karma start karma.config.js",
     "test:php": "vendor/bin/phpunit",
     "test:php:help": "npm run test:php -- --help",
     "test:e2e": "JEST_PUPPETEER_CONFIG=jest-puppeteer.config.cjs jest --runInBand --config=tests/e2e/jest.config.js",
