@@ -43,6 +43,7 @@ jobs:
 
       - name: Add files for snapshotting
         run: cp -r __static__ .test_artifacts/karma_snapshots/
+
       # Disable until we have a proper license.
       # - name: Upload Percy snapshots
       #   uses: percy/snapshot-action@v0.1.1
@@ -51,3 +52,8 @@ jobs:
       #     flags: '--config=percy.config.yml'
       #   env:
       #     PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+
+      - name: Uplaod code coverage report
+        uses: codecov/codecov-action@v1
+        with:
+          file: build/karma-coverage/lcov.info
