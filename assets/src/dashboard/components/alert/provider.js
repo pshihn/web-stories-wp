@@ -33,12 +33,16 @@ const Provider = ({ children }) => {
     { message: 'alert 2', severity: 'warning' },
   ]);
   const [inactiveAlerts, setInactiveAlerts] = useState([]);
+  const [allAlerts, setAllAlerts] = useState([]);
 
-  const allAlerts = useMemo(() => {
-    console.log('setting all alerts ', activeAlerts, inactiveAlerts);
-    return [...new Set([...activeAlerts, ...inactiveAlerts])];
-    debugger;
-  }, [activeAlerts, inactiveAlerts]);
+  const updateAlertsQueue = useCallback(
+    (newInactiveAlert) => {
+      debugger;
+      setInactiveAlerts([...new Set([...inactiveAlerts, ...newInactiveAlert])]);
+      setAllAlerts([...new Set([...inactiveAlerts, ...activeAlerts])]);
+    },
+    [inactiveAlerts, activeAlerts]
+  );
 
   const removeAlert = useCallback(
     (index) => {
@@ -47,23 +51,21 @@ const Provider = ({ children }) => {
       console.log('new inactive alert: ', newInactiveAlert);
       console.log('new list of active alerts ', alertsCopy);
       setActiveAlerts(alertsCopy);
-      setInactiveAlerts([...new Set([...inactiveAlerts, ...newInactiveAlert])]);
-      // const alertToHide = activeAlerts[index];
-      // console.log(alertToHide);
-      // alertToHide.isActive = false;
-      // const newAlertsSet = [...new Set([...activeAlerts, alertToHide])];
-      // setActiveAlerts(newAlertsSet);
+      updateAlertsQueue(newInactiveAlert);
     },
-    [activeAlerts, inactiveAlerts]
+    [activeAlerts, updateAlertsQueue]
   );
 
   const addAlert = useCallback(
     ({ message, severity }) => {
+      console.log('ALL ALERTS: ', allAlerts);
       const newAlert = allAlerts.reduce((_, alert) => {
+        console.log(alert?.message, message, alert?.message !== message);
         return alert?.message !== message;
       }, []);
       console.log('add this alert? ', newAlert);
       if (newAlert) {
+        console.log('add alert');
         setActiveAlerts([...activeAlerts, { message, severity }]);
       }
     },
