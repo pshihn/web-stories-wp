@@ -52,7 +52,7 @@ module.exports = function (config) {
     ],
 
     // list of files / patterns to exclude
-    exclude: ['**/test/**/*.js'],
+    exclude: ['**/test/**/*.js', '**/*.test.js'],
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
@@ -124,9 +124,13 @@ module.exports = function (config) {
 
     // Configure coverage output
     coverageReporter: {
-      type: 'lcov',
+      // specify a common output directory
       dir: 'build/logs/karma-coverage',
       includeAllSources: true,
+      reporters: [
+        { type: 'lcov', subdir: 'lcov-report' },
+        { type: 'text-summary' },
+      ],
     },
   });
 };
