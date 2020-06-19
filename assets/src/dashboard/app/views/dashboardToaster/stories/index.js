@@ -16,19 +16,19 @@
 /**
  * External dependencies
  */
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 /**
  * Internal dependencies
  */
-import { Alert } from '../../../../components/alert';
 import { Button } from '../../../../components';
+import { ToastProvider } from '../../../../components/toaster';
 import { ApiContext } from '../../../api/apiProvider';
-import ErrorQueue from '../';
+import DashboardToaster from '../';
 
 export default {
-  title: 'Dashboard/Views/ErrorQueue',
-  component: ErrorQueue,
+  title: 'Dashboard/Views/DashboardToaster',
+  component: DashboardToaster,
 };
 
 export const _default = () => {
@@ -53,9 +53,9 @@ export const _default = () => {
       >
         {errorIndexToAdd > 4 ? 'No more practice alerts' : 'Add practice alert'}
       </Button>
-      <Alert.Provider>
-        <ErrorQueue />
-      </Alert.Provider>
+      <ToastProvider>
+        <DashboardToaster />
+      </ToastProvider>
     </ApiContext.Provider>
   );
 };

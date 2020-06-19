@@ -47,7 +47,7 @@ Toaster.propTypes = {
       // move to types
       message: PropTypes.string.isRequired,
       severity: AlertSeveritiesPropType,
-      id: PropTypes.number.isRequired,
+      errorId: PropTypes.number.isRequired,
     })
   ),
   onRemoveToastClick: PropTypes.func,

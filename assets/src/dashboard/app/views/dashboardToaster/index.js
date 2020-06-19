@@ -23,10 +23,10 @@ import { useContext, useEffect } from 'react';
  * Internal dependencies
  */
 import { ApiContext } from '../../api/apiProvider';
-import { Alert } from '../../../components/alert';
+import { Toaster, useToastContext } from '../../../components/toaster';
 import { ALERT_SEVERITY } from '../../../constants';
 
-function ErrorQueue() {
+function DashboardToaster() {
   const {
     state: {
       stories: { error },
@@ -34,32 +34,27 @@ function ErrorQueue() {
   } = useContext(ApiContext);
 
   const {
-    actions: { removeAlert, addAlert },
-    state: { activeAlerts },
-  } = Alert.useAlertContext();
+    actions: { removeToast, addToast },
+    state: { activeToasts },
+  } = useToastContext();
 
   useEffect(() => {
     if (error?.message) {
-      addAlert({
+      addToast({
         message: error.message,
         severity: ALERT_SEVERITY.ERROR,
         errorId: error.errorId,
       });
     }
-  }, [error, addAlert]);
+  }, [error, addToast]);
 
   return (
-    <Alert.Wrapper>
-      {activeAlerts.map((activeAlert, index) => (
-        <Alert.Container
-          key={`alert_${index}`}
-          message={activeAlert.message}
-          severity={activeAlert.severity}
-          handleDismissClick={() => removeAlert(index)}
-        />
-      ))}
-    </Alert.Wrapper>
+    <Toaster
+      activeToasts={activeToasts}
+      onRemoveToastClick={removeToast}
+      allowEarlyDismiss
+    />
   );
 }
 
-export default ErrorQueue;
+export default DashboardToaster;

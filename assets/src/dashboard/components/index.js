@@ -71,7 +71,7 @@ export {
   TableStatusCell,
 } from './table';
 export { TemplateNavBar } from './templateNavBar';
-export { default as Toaster } from './toaster';
+export { Toaster } from './toaster';
 export { default as ToggleButtonGroup } from './toggleButtonGroup';
 export { default as TypeaheadInput } from './typeaheadInput';
 export { default as TypeaheadOptions } from './typeaheadOptions';
