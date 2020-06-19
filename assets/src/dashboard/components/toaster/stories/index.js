@@ -16,7 +16,7 @@
 /**
  * External dependencies
  */
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { boolean } from '@storybook/addon-knobs';
 /**
  * Internal dependencies

@@ -20,4 +20,4 @@
 import Container from './container';
 import { Wrapper } from './components';
 
-export const Alert = { Container, Wrapper };
+export default { Container, Wrapper };
