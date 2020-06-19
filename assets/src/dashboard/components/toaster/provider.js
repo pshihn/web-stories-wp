@@ -91,10 +91,17 @@ const ToastProvider = ({ children }) => {
 
   const value = useMemo(
     () => ({
-      state: { activeToasts },
+      state: { allToasts, activeToasts, inactiveToasts },
       actions: { removeToast, addToast, resetToastHistory },
     }),
-    [activeToasts, removeToast, addToast, resetToastHistory]
+    [
+      allToasts,
+      activeToasts,
+      inactiveToasts,
+      removeToast,
+      addToast,
+      resetToastHistory,
+    ]
   );
 
   return (

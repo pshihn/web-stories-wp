@@ -25,7 +25,6 @@ import { AlertSeveritiesPropType } from '../../types';
 import { Alert } from '../';
 
 function Toaster({ allowEarlyDismiss, activeToasts, onRemoveToastClick }) {
-  console.log('toast!');
   return (
     <Alert.Wrapper>
       {activeToasts.map((activeToast, index) => (

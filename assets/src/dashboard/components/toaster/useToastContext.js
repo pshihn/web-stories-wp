@@ -27,7 +27,7 @@ const useToasterContext = () => {
   const context = useContext(ToasterContext);
   if (!context) {
     throw new Error(
-      'useToasterContext() must be used within a <Alert.Provider />'
+      'useToasterContext() must be used within a <Toast.Provider />'
     );
   }
   return context;
