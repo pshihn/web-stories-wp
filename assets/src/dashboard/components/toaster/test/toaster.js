@@ -26,7 +26,7 @@ import { renderWithTheme } from '../../../testUtils/';
 import Toaster from '../toaster';
 import { ALERT_SEVERITY } from '../../../constants';
 
-const activeAlert = {
+const testAlert = {
   message: 'i am an error',
   severity: ALERT_SEVERITY.ERROR,
 };
@@ -35,7 +35,7 @@ describe('Toaster', () => {
   it('should have 1 active alert', () => {
     const { getByRole } = renderWithTheme(
       <Toaster
-        activeToasts={[activeAlert]}
+        activeToasts={[testAlert]}
         allowEarlyDismiss={false}
         onRemoveToastClick={mockRemoveToastClick}
       />
@@ -49,7 +49,7 @@ describe('Toaster', () => {
   it('should not load dismiss button when allowEarlyDismiss is false', () => {
     const { queryAllByRole } = renderWithTheme(
       <Toaster
-        activeToasts={[activeAlert]}
+        activeToasts={[testAlert]}
         allowEarlyDismiss={false}
         onRemoveToastClick={mockRemoveToastClick}
       />
@@ -63,7 +63,7 @@ describe('Toaster', () => {
   it('should load dismiss button when allowEarlyDismiss is true', () => {
     const { getByRole } = renderWithTheme(
       <Toaster
-        activeToasts={[activeAlert]}
+        activeToasts={[testAlert]}
         allowEarlyDismiss={true}
         onRemoveToastClick={mockRemoveToastClick}
       />

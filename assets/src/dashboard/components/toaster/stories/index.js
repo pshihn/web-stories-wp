@@ -22,10 +22,10 @@ import { boolean } from '@storybook/addon-knobs';
 /**
  * Internal dependencies
  */
-import Toaster from '../toaster';
-import ToastProvider, { ToasterContext } from '../provider';
-import Button from '../../button';
 import { ALERT_SEVERITY } from '../../../constants';
+import Button from '../../button';
+import ToastProvider, { ToasterContext } from '../provider';
+import Toaster from '../toaster';
 
 export default {
   title: 'Dashboard/Components/Toaster',

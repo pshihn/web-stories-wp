@@ -21,7 +21,7 @@ import PropTypes from 'prop-types';
 /**
  * Internal dependencies
  */
-import { AlertSeveritiesPropType } from '../../types';
+import { ToastMessagesPropType } from '../../types';
 import { Alert } from '../';
 
 function Toaster({ allowEarlyDismiss, activeToasts, onRemoveToastClick }) {
@@ -41,15 +41,8 @@ function Toaster({ allowEarlyDismiss, activeToasts, onRemoveToastClick }) {
 }
 
 Toaster.propTypes = {
+  activeToasts: ToastMessagesPropType,
   allowEarlyDismiss: PropTypes.bool,
-  activeToasts: PropTypes.arrayOf(
-    PropTypes.shape({
-      // move to types
-      message: PropTypes.string.isRequired,
-      severity: AlertSeveritiesPropType,
-      errorId: PropTypes.number.isRequired,
-    })
-  ),
   onRemoveToastClick: PropTypes.func,
 };
 export default Toaster;

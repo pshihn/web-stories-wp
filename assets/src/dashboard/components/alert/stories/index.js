@@ -36,23 +36,26 @@ export const _default = () => {
     <Wrapper>
       <AlertContainer
         message={text('errorMessage', 'this is an error')}
-        allowDismiss
         severity={ALERT_SEVERITY.ERROR}
+        allowDismiss={boolean('allowDismiss1')}
       />
       <AlertContainer
         message={text('warningMessage', 'this is a warning')}
-        allowDismiss
         severity={ALERT_SEVERITY.WARNING}
+        allowDismiss={boolean('allowDismiss2')}
       />
       <AlertContainer
         message={text('infoMessage', 'this is informational')}
         severity={ALERT_SEVERITY.INFO}
+        allowDismiss={boolean('allowDismiss3')}
       />
       <AlertContainer
         message={text('successMessage', 'this is successful')}
         severity={ALERT_SEVERITY.SUCCESS}
+        allowDismiss={boolean('allowDismiss4')}
       />
       <AlertContainer
+        allowDismiss={boolean('allowDismiss5')}
         message={text(
           'defaultMessage',
           'this is an alert without a severity passed in'

@@ -34,11 +34,11 @@ const ToastProvider = ({ children }) => {
   const [inactiveToasts, setInactiveToasts] = useState([]);
   const [allToasts, setAllToasts] = useState([]);
 
-  const resetToastHistory = useCallback(() => {
+  const resetToasts = useCallback(() => {
     setAllToasts([]);
     setActiveToasts([]);
     setInactiveToasts([]);
-  }, [setAllToasts]);
+  }, [setAllToasts, setActiveToasts, setInactiveToasts]);
 
   const removeToast = useCallback(
     (index = 0) => {
@@ -87,22 +87,22 @@ const ToastProvider = ({ children }) => {
 
   useEffect(() => {
     return () => {
-      resetToastHistory();
+      resetToasts();
     };
-  }, [resetToastHistory]);
+  }, [resetToasts]);
 
   const value = useMemo(
     () => ({
-      state: { allToasts, activeToasts, inactiveToasts },
-      actions: { removeToast, addToast, resetToastHistory },
+      state: { activeToasts, allToasts, inactiveToasts },
+      actions: { addToast, removeToast, resetToasts },
     }),
     [
-      allToasts,
+      addToast,
       activeToasts,
+      allToasts,
       inactiveToasts,
       removeToast,
-      addToast,
-      resetToastHistory,
+      resetToasts,
     ]
   );
 
