@@ -27,7 +27,7 @@ import PropTypes from 'prop-types';
 
 export const ToasterContext = createContext(null);
 
-const AUTO_REMOVE_TOAST_TIME_INTERVAL = 10000;
+export const AUTO_REMOVE_TOAST_TIME_INTERVAL = 10000;
 
 const ToastProvider = ({ children }) => {
   const [activeToasts, setActiveToasts] = useState([]);
@@ -36,6 +36,8 @@ const ToastProvider = ({ children }) => {
 
   const resetToastHistory = useCallback(() => {
     setAllToasts([]);
+    setActiveToasts([]);
+    setInactiveToasts([]);
   }, [setAllToasts]);
 
   const removeToast = useCallback(
