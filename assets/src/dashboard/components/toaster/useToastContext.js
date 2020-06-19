@@ -21,16 +21,16 @@ import { useContext } from 'react';
 /**
  * Internal dependencies
  */
-import { AlertContext } from './provider';
+import { ToasterContext } from './provider';
 
-const useAlertContext = () => {
-  const context = useContext(AlertContext);
+const useToasterContext = () => {
+  const context = useContext(ToasterContext);
   if (!context) {
     throw new Error(
-      'useAlertContext() must be used within a <Alert.Provider />'
+      'useToasterContext() must be used within a <Alert.Provider />'
     );
   }
   return context;
 };
 
-export default useAlertContext;
+export default useToasterContext;

@@ -16,12 +16,13 @@
 /**
  * External dependencies
  */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 /**
  * Internal dependencies
  */
 import { Alert } from '../../../../components/alert';
+import { Button } from '../../../../components';
 import { ApiContext } from '../../../api/apiProvider';
 import ErrorQueue from '../';
 
@@ -32,16 +33,26 @@ export default {
 
 export const _default = () => {
   const [error, setError] = useState();
+  const [errorIndexToAdd, setErrorIndexToAdd] = useState(0);
+  const errors = [
+    { message: 'i am an error' },
+    { message: 'i am a second error' },
+    { message: 'i am third' },
+    { message: 'something is really not working!' },
+    { message: 'oh no!' },
+  ];
 
   return (
     <ApiContext.Provider value={{ state: { stories: { error } } }}>
-      <button
+      <Button
         onClick={() => {
-          setError({ message: 'i am an error' });
+          setErrorIndexToAdd(errorIndexToAdd + 1);
+          setError({ ...errors[errorIndexToAdd], errorId: errorIndexToAdd });
         }}
+        isDisabled={errorIndexToAdd > 4}
       >
-        {'Add Error'}
-      </button>
+        {errorIndexToAdd > 4 ? 'No more practice alerts' : 'Add practice alert'}
+      </Button>
       <Alert.Provider>
         <ErrorQueue />
       </Alert.Provider>

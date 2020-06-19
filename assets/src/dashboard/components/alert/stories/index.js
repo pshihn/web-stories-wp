@@ -17,7 +17,7 @@
 /**
  * External dependencies
  */
-import { text } from '@storybook/addon-knobs';
+import { boolean, text } from '@storybook/addon-knobs';
 
 /**
  * Internal dependencies
@@ -36,10 +36,12 @@ export const _default = () => {
     <Wrapper>
       <AlertContainer
         message={text('errorMessage', 'this is an error')}
+        allowDismiss
         severity={ALERT_SEVERITY.ERROR}
       />
       <AlertContainer
         message={text('warningMessage', 'this is a warning')}
+        allowDismiss
         severity={ALERT_SEVERITY.WARNING}
       />
       <AlertContainer
@@ -64,6 +66,7 @@ export const JustAlert = () => {
   return (
     <AlertContainer
       message={text('warningMessage', 'this is a warning')}
+      allowDismiss={boolean('allowDismiss')}
       severity={ALERT_SEVERITY.WARNING}
     />
   );

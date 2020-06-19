@@ -24,6 +24,7 @@ import { useContext, useEffect } from 'react';
  */
 import { ApiContext } from '../../api/apiProvider';
 import { Alert } from '../../../components/alert';
+import { ALERT_SEVERITY } from '../../../constants';
 
 function ErrorQueue() {
   const {
@@ -37,24 +38,15 @@ function ErrorQueue() {
     state: { activeAlerts },
   } = Alert.useAlertContext();
 
-  // Todo: add in more than just errors
   useEffect(() => {
     if (error?.message) {
-      addAlert({ message: error.message, severity: 'error' });
+      addAlert({
+        message: error.message,
+        severity: ALERT_SEVERITY.ERROR,
+        errorId: error.errorId,
+      });
     }
   }, [error, addAlert]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (activeAlerts.length > 0) {
-        removeAlert(0);
-      }
-    }, 10000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [activeAlerts, removeAlert]);
 
   return (
     <Alert.Wrapper>
