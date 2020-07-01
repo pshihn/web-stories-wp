@@ -74,6 +74,23 @@ class Story_Post_Type extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers ::init
+	 */
+	public function test_init() {
+		$story_post_type = new \Google\Web_Stories\Story_Post_Type();
+		$story_post_type->init();
+
+		$this->assertSame( 10, has_filter( 'admin_enqueue_scripts', [ $story_post_type, 'admin_enqueue_scripts' ] ) );
+		$this->assertSame( 10, has_filter( 'show_admin_bar', [ $story_post_type, 'show_admin_bar' ] ) );
+		$this->assertSame( 10, has_filter( 'replace_editor', [ $story_post_type, 'replace_editor' ] ) );
+		$this->assertSame( 10, has_filter( 'use_block_editor_for_post_type', [ $story_post_type, 'filter_use_block_editor_for_post_type' ] ) );
+		$this->assertSame( 10, has_filter( 'template_include', [ $story_post_type, 'filter_template_include' ] ) );
+		$this->assertSame( PHP_INT_MAX, has_filter( 'amp_skip_post', [ $story_post_type, 'skip_amp' ] ) );
+		$this->assertSame( 10, has_filter( '_wp_post_revision_fields', [ $story_post_type, 'filter_revision_fields' ] ) );
+		$this->assertSame( 10, has_filter( 'googlesitekit_amp_gtag_opt', [ $story_post_type, 'filter_site_kit_gtag_opt' ] ) );
+	}
+
+	/**
 	 * @covers ::get_editor_settings
 	 */
 	public function test_get_editor_settings_admin() {
@@ -149,10 +166,8 @@ class Story_Post_Type extends \WP_UnitTestCase {
 	 * @covers ::admin_enqueue_scripts
 	 */
 	public function test_admin_enqueue_scripts() {
-		$post_type_object = new \Google\Web_Stories\Story_Post_Type();
-		set_current_screen( 'post.php' );
-		get_current_screen()->post_type = \Google\Web_Stories\Story_Post_Type::POST_TYPE_SLUG;
-		get_current_screen()->base      = 'post';
+		$post_type_object          = new \Google\Web_Stories\Story_Post_Type();
+		$GLOBALS['current_screen'] = convert_to_screen( \Google\Web_Stories\Story_Post_Type::POST_TYPE_SLUG );
 		$post_type_object->admin_enqueue_scripts( 'post.php' );
 		$this->assertTrue( wp_script_is( \Google\Web_Stories\Story_Post_Type::WEB_STORIES_SCRIPT_HANDLE, 'registered' ) );
 		$this->assertTrue( wp_style_is( \Google\Web_Stories\Story_Post_Type::WEB_STORIES_SCRIPT_HANDLE, 'registered' ) );
