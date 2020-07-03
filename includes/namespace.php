@@ -80,6 +80,35 @@ function deactivate( $network_wide ) {
 register_activation_hook( WEBSTORIES_PLUGIN_FILE, '\Google\Web_Stories\activate' );
 register_deactivation_hook( WEBSTORIES_PLUGIN_FILE, '\Google\Web_Stories\deactivate' );
 
+if (
+	! class_exists( '\Google\Web_Stories\Plugin' ) ||
+	! file_exists( WEBSTORIES_PLUGIN_DIR_PATH . '/assets/js/edit-story.js' )
+) {
+	add_action(
+		'admin_notices',
+		static function () {
+			?>
+			<div class="notice notice-error">
+				<p>
+					<strong><?php esc_html_e( 'Web Stories plugin could not be initialized.', 'web-stories' ); ?></strong>
+				</p>
+				<p>
+					<?php
+					printf(
+						/* translators: %s: build commands. */
+						__( 'You appear to be running an incomplete version of the plugin. Please run %s to finish installation.', 'web-stories' ), // phpcs:ignore WordPress.Security.EscapeOutput
+						'<code>composer install &amp;&amp; npm install &amp;&amp; npm run build</code>'
+					)
+					?>
+				</p>
+			</div>
+			<?php
+		}
+	);
+
+	return;
+}
+
 global $web_stories;
 
 $web_stories = new Plugin();
