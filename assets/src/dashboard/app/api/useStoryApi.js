@@ -144,14 +144,11 @@ const useStoryApi = (dataAdapter, { editStoryURL, storyApi }) => {
 
         const serverStoryResponse = await response.json();
 
-        const reshapedStories = serverStoryResponse
-          .map(reshapeStoryObject(editStoryURL))
-          .filter(Boolean);
-
         dispatch({
           type: STORY_ACTION_TYPES.FETCH_STORIES_SUCCESS,
           payload: {
-            stories: reshapedStories,
+            editStoryURL,
+            stories: serverStoryResponse,
             totalPages,
             totalStoriesByStatus,
             page,
